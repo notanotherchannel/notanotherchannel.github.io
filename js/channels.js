@@ -152,7 +152,7 @@ async function channelNameValidation(name) {
 }
 
 async function isProfane(channelName) {
-  const response = await fetch('./lang.json');
+  const response = await fetch('./js/lang.json');
   let badJson = await response.json();
   let badWordList = badJson.words;
 

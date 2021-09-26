@@ -11,8 +11,6 @@ I created this project for two reasons. One, because I'm in 180+ channels at wor
  - [Supabase](https://supabase.io/) - backend (honestly incredibly easy and highly recommended)
  - [Pure.css](https://purecss.io/) - itty bitty css helper
 
-This lovely lady made the main [doodle](https://www.fiverr.com/muthianwahida?source=order_page_summary_seller_link)
-
 # What's the purpose?
 I made this as a light hearted work joke you can share with friends and colleagues. It really doesn't have a hard purpose. I am interested to see how many channels can get added though. 
 
