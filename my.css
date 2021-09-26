@@ -70,14 +70,17 @@ box-shadow: 0 10px 20px rgba(255,255,255,.25);
 .screenOff canvas{
 box-shadow: 0 5px 10px rgba(255,255,255,.15);
 }
-.footer {
-position: absolute;
-height: 6%;
-width: 91%;
-background: black;
-bottom: -6%;
-box-shadow: 0 2px 10px rgba(0,0,0,.75);
-}
+.screen-footer {
+  position: absolute;
+  height: 6%;
+  width: 91%;
+  background: black;
+  bottom: -6%;
+  box-shadow: 0 2px 10px rgba(0,0,0,.75);
+  }
+
+
+
 .message {
 display:none;
 background: white;
@@ -176,7 +179,7 @@ The content `<div>` is where all your content goes.
      display: flex;
      justify-content: center;     
      height: 100vh;
-     min-height: 740px;     
+     min-height: 940px;     
  }
     .header h1 {
         margin: 0.2em 0;
@@ -240,6 +243,14 @@ The content `<div>` is where all your content goes.
 }
 
 
+.footer {
+  color: rgb(170, 170, 170);
+  font-size: 12px;
+  background-color: #29323c;
+  font-family: 'Space Mono', monospace !important;
+  padding: 20px 0;
+  text-align: center;
+  }
 
 /*
 The `#menu` `<div>` is the parent `<div>` that contains the `.pure-menu` that
@@ -642,4 +653,52 @@ Hides the menu at `48em`, but modify this based on your app's needs.
       transform: scale(1, 1);
       transform: skew(0, 0);
     }
+  }
+
+  /* Share buttons */
+  .share-list {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .share-list a {
+    width: 20px;
+    height: 20px;
+    padding: 7px;
+    margin: 10px;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  .share-list a img {
+    width: 100%;
+    height: 100%;
+    filter: invert(100%);
+  }
+  
+  a.fb-h {
+    background: #3b5998;
+  }
+  
+  a.tw-h {
+    background: #00acee;
+  }
+  
+  a.li-h {
+    background: #0077b5;
+  }
+  
+  a.re-h {
+    background: #ff5700;
+  }
+  
+  a.pi-h {
+    background: #c8232c;
+  }
+  
+  .share-buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px
   }
