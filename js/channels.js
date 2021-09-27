@@ -77,7 +77,7 @@ async function botCheck() {
   const botdPromise = Botd.load({ token: 'RWABKoAEDbhjxAIiR6s', mode: 'allData' })
   const botd = await botdPromise
   const result = await botd.detect()
-  if (result.bot.automationTool.probability < 0.2 || result.bot.browserSpoofing.probability < 0.2 || result.vm.probability < 0.2) {
+  if (result.bot.automationTool.probability < 0.2 && result.bot.browserSpoofing.probability < 0.2 && result.vm.probability < 0.2) {
     human = true
   }
 }
