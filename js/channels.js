@@ -74,6 +74,17 @@ populateTotalChannels();
 var form = document.getElementById('myForm');
 var formMessage = document.getElementById('formMessage');
 async function onSubmit(event) {
+
+  // recaptcha - https://consultwithgriff.com/recaptcha-static-sites-azure-functions/
+  console.log('clicked');
+  grecaptcha.ready(() => {
+    grecaptcha
+      .execute("6LdOGZQcAAAAADuaEE2XBlMKNdqWGoa1PbHHReQ1", { action: "submit" })
+      .then((token) => {
+        // token!!
+      });
+  });
+
   if (event) {
     event.preventDefault();
     let channelName = await channelNameValidation(event.target.channelName.value)
@@ -97,7 +108,7 @@ async function onSubmit(event) {
       docCount = document.getElementById('totalChannelCount');
       console.log(docCount.innerHTML);
       let count = parseInt(docCount.innerHTML)
-      count++ 
+      count++
       docCount.innerHTML = count;
 
       // update backend
@@ -134,7 +145,7 @@ async function channelNameValidation(name) {
 
   // check for special characters
   var regex = /^[a-z- \xC0-\xFF]+$/i;
-  if (!regex.test(final)) {    
+  if (!regex.test(final)) {
     formMessage.innerHTML = '<span style="color: red;">Channel name may only include regular characters, spaces, and hyphens.</span>';
     return false;
   }
