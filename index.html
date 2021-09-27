@@ -33,7 +33,9 @@
     <link href='https://fonts.googleapis.com/css?family=Press Start 2P' rel='stylesheet'>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script async src="https://cdn.jsdelivr.net/npm/@fpjs-incubator/botd-agent@0/dist/botd.min.js">
+    </script>
 </head>
 
 <body>
@@ -87,6 +89,8 @@
                         <b style="margin-bottom: 10px;">Go ahead, add another channel here instead</b>
                         <form id="myForm" class="form">
                             <input type="text" name="channelName" placeholder="Add a channel...">
+                            <input id="username" type="text" name="username" placeholder="" value="">
+                            <input id="email" type="text" name="email" placeholder="" value="">
                             <input type="submit" value="Submit">
                         </form>
                         <p id="formMessage"></p>
@@ -95,7 +99,7 @@
                 </div>
                 <div class="leaderboard">
                     The internet has added <b id="totalChannelCount"></b> channels to <a
-                        href="notanotherchannel.com">notanotherchannel.com</a>
+                        href="#">notanotherchannel.com</a>
                 </div>
             </div>
 
@@ -173,39 +177,22 @@
                         </a>
                     </div>
                 </div>
-
                 <div style="display: flex; justify-content: center; align-items: center;">
-
                     <p style="padding-right: 10px;">Source code </br>available:</p>
-
-
                     <a class="github-button" href="https://github.com/notanotherchannel/notanotherchannel.github.io"
                         data-color-scheme="no-preference: dark_high_contrast; light: dark; dark: dark;"
                         data-size="large" data-show-count="true"
                         aria-label="Star notanotherchannel/notanotherchannel.github.io on GitHub">Star</a>
                 </div>
-
             </div>
-
-
-
-
-
         </div>
-
-
-
-
-
     </div>
     </div>
-
     <script src="js/ui.js"></script>
     <script src="js/share.js"></script>
     <script src="https://unpkg.com/@supabase/supabase-js"></script>
     <script src="js/channels.js"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js?render=6LdOGZQcAAAAADuaEE2XBlMKNdqWGoa1PbHHReQ1"></script>
 </body>
 
 </html>

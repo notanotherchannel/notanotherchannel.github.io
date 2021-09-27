@@ -235,6 +235,10 @@ The content `<div>` is where all your content goes.
     background-color: #b81732;
   }
   
+  #username {
+    display: none;
+    visibility: hidden;
+  }
 
 .content-subhead {
     margin: 40px 0 20px 0;

@@ -104,7 +104,6 @@
 
         var toggleScreen = function () {
 
-
             if (typeof switchTimeout != 'undefined') {
                 clearTimeout(switchTimeout);
             }
@@ -130,6 +129,10 @@
             isOn = !isOn;
         };
 
+        // honeypot
+        var email = document.getElementById("email");
+        email.style.display = "none";
+    
         return {
             init: init
         };

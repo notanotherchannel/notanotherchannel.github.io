@@ -69,60 +69,76 @@ async function populateTotalChannels() {
 populateTotalChannels();
 
 //
+// Human Validation 
+//
+let human = false;
+async function botCheck() {
+  // bot check
+  const botdPromise = Botd.load({ token: 'RWABKoAEDbhjxAIiR6s', mode: 'allData' })
+  const botd = await botdPromise
+  const result = await botd.detect()
+  if (result.bot.automationTool.probability < 0.2 || result.bot.browserSpoofing.probability < 0.2 || result.vm.probability < 0.2) {
+    human = true
+  }
+}
+
+botCheck();
+
+
+//
 // Form Submission 
 // 
 var form = document.getElementById('myForm');
 var formMessage = document.getElementById('formMessage');
 async function onSubmit(event) {
-
-  // recaptcha - https://consultwithgriff.com/recaptcha-static-sites-azure-functions/
-  console.log('clicked');
-  grecaptcha.ready(() => {
-    grecaptcha
-      .execute("6LdOGZQcAAAAADuaEE2XBlMKNdqWGoa1PbHHReQ1", { action: "submit" })
-      .then((token) => {
-        // token!!
-      });
-  });
-
   if (event) {
     event.preventDefault();
-    let channelName = await channelNameValidation(event.target.channelName.value)
-    if (!channelName) {
+    
+    // honeypot
+    if (event.target.username.value || event.target.email.value) {      
+      formMessage.innerHTML = '<span style="color: red;">You might be a bot.</span>'
       return false
-    } else {
-      console.log(channelName);
-
-      // add new channel
-      channelList = document.getElementsByClassName("pure-menu-list")[0]
-      var rand = Math.floor(Math.random() * 100);
-      let str = `<li class="pure-menu-item">
-              <a href="#" class="pure-menu-link text-bold">
-                  #&thinsp;${channelName}
-                  <span class="notification-count">${rand}</span>
-              </a>                    
-          </li>`;
-      channelList.insertAdjacentHTML('afterbegin', str);
-
-      // increase counter by 1
-      docCount = document.getElementById('totalChannelCount');
-      console.log(docCount.innerHTML);
-      let count = parseInt(docCount.innerHTML)
-      count++
-      docCount.innerHTML = count;
-
-      // update backend
-      const { data, error } = await supabase
-        .from('channels')
-        .insert([
-          { name: channelName }
-        ])
-
     }
 
+    if (human) {
+      // submission
+      let channelName = await channelNameValidation(event.target.channelName.value)
+      if (!channelName) {
+        return false
+      } else {
+
+        // add new channel
+        channelList = document.getElementsByClassName("pure-menu-list")[0]
+        var rand = Math.floor(Math.random() * 100);
+        let str = `<li class="pure-menu-item">
+           <a href="#" class="pure-menu-link text-bold">
+               #&thinsp;${channelName}
+               <span class="notification-count">${rand}</span>
+           </a>                    
+       </li>`;
+        channelList.insertAdjacentHTML('afterbegin', str);
+
+        // increase counter by 1
+        docCount = document.getElementById('totalChannelCount');
+        let count = parseInt(docCount.innerHTML)
+        count++
+        docCount.innerHTML = count;
+
+        // update backend
+        const { data, error } = await supabase
+          .from('channels')
+          .insert([
+            { name: channelName }
+          ])
+
+          form.reset();
+          formMessage.innerHTML = 'Wow, great... you\'ve added another channel.';
+      }
+    } else {
+      alert('We have detected that your connection is suspicious')
+    }
   }
-  form.reset();
-  formMessage.innerHTML = 'Wow, great... you\'ve added another channel.';
+
 }
 form.onsubmit = onSubmit;
 
@@ -172,7 +188,6 @@ async function isProfane(channelName) {
   var length = badWordList.length;
   for (i = (length - 1); i >= 0; i--) {
     if (channelName.indexOf(badWordList[i]) > -1) {
-      console.log('bad word is: ', channelName.indexOf(badWordList[i]));
       return true;
     }
   }
@@ -183,7 +198,6 @@ async function isProfane(channelName) {
   for (i = 0; i < words.length; i++) {
     var word = words[i].toLowerCase();
     if (badWordList.indexOf(word) > -1) {
-      console.log('bad word is: ', channelName.indexOf(badWordList[i]));
       return true;
     }
   }
