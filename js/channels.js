@@ -82,7 +82,7 @@ async function botCheck() {
   }
 }
 
-botCheck();
+
 
 
 //
@@ -93,7 +93,7 @@ var formMessage = document.getElementById('formMessage');
 async function onSubmit(event) {
   if (event) {
     event.preventDefault();
-    
+    await botCheck();
     // honeypot
     if (event.target.username.value || event.target.email.value) {      
       formMessage.innerHTML = '<span style="color: red;">You might be a bot.</span>'
